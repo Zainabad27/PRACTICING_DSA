@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <string>
 #include <map>
 using namespace std;
 class node
@@ -335,25 +336,63 @@ int findindx(int number, vector<int> inorder, int left, int right)
     return -1;
 }
 
-int indx = 0;
-node *build_tree(vector<int> &preorder, vector<int> &inorder, int &preidx, int l, int r)
-{
-    if(l>r){return nullptr;}
+// int indx = 0;
+// node *build_tree(vector<int> &preorder, vector<int> &inorder, int &preidx, int l, int r)
+// {
+//     if (l > r)
+//     {
+//         return nullptr;
+//     }
 
-    node *root = new node(preorder[preidx]);
-    preidx++;
-    int inidx = findindx(preorder[preidx], inorder, l, r);
-    root->left = build_tree(preorder, inorder, preidx, l, inidx - 1);
-    root->right = build_tree(preorder, inorder, preidx, inidx + 1, r);
-    return root;
+//     node *root = new node(preorder[preidx]);
+//     preidx++;
+//     int inidx = findindx(preorder[preidx], inorder, l, r);
+//     root->left = build_tree(preorder, inorder, preidx, l, inidx - 1);
+//     root->right = build_tree(preorder, inorder, preidx, inidx + 1, r);
+//     return root;
+// }
+int sumtree(node *root)
+{
+    if (root == nullptr)
+    {
+        return 0;
+    }
+
+    int leftsum = sumtree(root->left);
+    int rightsum = sumtree(root->right);
+
+    root->data += leftsum + rightsum;
+
+    return root->data;
+}
+vector<string> ans;
+string str;
+string treepath(node *root)
+{
+
+    if (root== nullptr)
+    {
+        return "null";
+    }
+
+    string leftpath = to_string(root->data) + "---->" + treepath(root->left);
+    string rightpath = to_string(root->data) + "---->" + treepath(root->right);
+    ans.push_back(leftpath);
+    ans.push_back(rightpath);
+
+    return rightpath;
 }
 int main()
 {
     vector<int> tree = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
     node *root = createtree(tree);
 
-    int preorder[] = {3, 9, 20, 15, 7};
-    int inorder[] = {9, 3, 15, 20, 7};
-    node *root = new node(preorder[0]);
+    treepath(root);
+
+    for (string path : ans)
+    {
+        cout << path << "\n";
+    }
+
     return 0;
 }
