@@ -292,7 +292,6 @@ void k_th_level_BT(node *root, int k)
 //     else if(find_lca_left&&!find_lca_right){
 //         return find_lca_left;
 //     }
-
 // }
 
 node *findlca(node *root, int p, int q)
