@@ -4,3 +4,6 @@
 img.bmp
 *.txt
 c++ roadmap
+
+
+!src/**/*.cpp
