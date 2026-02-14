@@ -169,6 +169,7 @@ vector<int> nxt_grt_element(vector<int> nums1, vector<int> nums2)
 }
 int main()
 {
+    cout<<"hi bro\n\n\n\n";
 
     return 0;
 }

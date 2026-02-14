@@ -12,31 +12,63 @@ int absolute(int n)
     return n;
 }
 
-int main()
+int firstMissingPositive(vector<int> nums)
 {
-    int min = 1;
+     int n = nums.size();
 
-    vector<int> nums = {-2, -2, -2};
 
-    unordered_set<int> us;
+    
+    for(int i=0;i<n;i++){
+         if (nums[i] < 0)
+        {
+            nums[i] = 0;
+        }
 
-    for (int i = 0; i < nums.size(); i++)
-    {
-        bool minPresent = false;
-
-        minPresent = (us.end() != us.find(nums[i])) && (*(us.find(nums[i])) == min);
-        
-
-        if (nums[i] == min || minPresent)
-            min++;
-        else
-            us.insert(nums[i]);
     }
 
-    cout
-        << "\n\n\n\n"
-        << min
-        << " is the answer\n\n\n";
+    for (int i = 0; i < n; i++)
+    {
+
+        
+        if (absolute(nums[i]) >= 1 && absolute(nums[i]) <= n)
+        {
+
+            int value = absolute(nums[i]);
+            int index = value - 1;
+
+
+            if(nums[index]>0){
+
+            nums[index] = nums[index] * -1;
+
+
+
+            }
+            else if(nums[i]==0){
+                nums[index]=-1;
+            }
+
+
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] >= 0)
+            return i + 1;
+    }
+
+    return n + 1;
+}
+
+int main()
+{
+
+    vector<int> nums = {3,4,0,2};
+
+    int ans = firstMissingPositive(nums);
+
+    cout << ans;
 
     return 0;
 }

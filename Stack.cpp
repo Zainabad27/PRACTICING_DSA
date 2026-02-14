@@ -1,9 +1,26 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include <stack>
 using namespace std;
-
+void swap(string &a, string &b)
+{
+    string temp = a;
+    a = b;
+    b = temp;
+}
+void sort(string str)
+{
+    for (int i = 0; i < str.size() - 1; i++)
+    {
+        for (int j = i + 1; j < str.size() - i; j++)
+        {
+            if (str[i] > str[j])
+                swap(str[i], str[j]);
+        }
+    }
+}
 template <typename T>
 
 class Mystack
@@ -35,12 +52,12 @@ bool sameSign(int a, int b)
         return true;
 }
 
-void swap(int &a, int &b)
-{
-    int temp = a;
-    a = b;
-    b = temp;
-}
+// void swap(int &a, int &b)
+// {
+//     int temp = a;
+//     a = b;
+//     b = temp;
+// }
 vector<int> asteroidCollision(vector<int> asdteroids)
 {
 
@@ -60,7 +77,7 @@ vector<int> asteroidCollision(vector<int> asdteroids)
 
             while (i < asdteroids.size())
             {
-                if (ans.size() == 0)
+                if (ans.size() == 0 || ans.top() < 0)
                 {
                     ans.push(asdteroids[i]);
                     i++;
@@ -109,12 +126,22 @@ vector<int> asteroidCollision(vector<int> asdteroids)
         end--;
     }
 
-
-
     return final_ans;
 }
 int main()
 {
 
+    string str = "zxcvdeie";
+    sort(str);
+
+    cout << str << "\n\n\n`";
+
+    bool result = str[0] > str[1];
+    swap(str[0],str[1]);
+    cout<<str[0]<<"\n\n\n";
+    cout << result;
+
+    cout<<str<<"\n\n\n";
+    // typedef((int)str[0]);
     return 0;
 }
